@@ -1,0 +1,13 @@
+# Contornas virtuais
+.venv/
+venv/
+env/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Cache de Python
+__pycache__/
+*.py[cod]
