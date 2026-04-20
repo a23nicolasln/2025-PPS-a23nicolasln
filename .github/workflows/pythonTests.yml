@@ -1,0 +1,31 @@
+name: Python Unit Tests
+
+# Configura o disparador para que se execute con cada push
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descarga o código do repositorio no corredor de GitHub
+      - name: Checkout de código
+        uses: actions/checkout@v4
+
+      # 2. Configura a versión de Python
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. Instalar dependencias (se tes un ficheiro requirements.txt)
+      # Se non tes dependencias externas, este paso pode saltarse
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # 4. Executar os tests usando o módulo unittest
+      - name: Executar tests de Python
+        run: |
+          python -m unittest test_utils.py
